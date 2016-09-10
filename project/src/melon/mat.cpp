@@ -158,7 +158,7 @@ void Matrix<DataType>::print(ostream& out)
 		for(int i=0;i<row;++i)
 		{
 			for(int j=0;j<col;++j)
-				out<<(*this)[i][j]<<"\t";
+				out<<(*this)[i][j]<<" ";
 			out<<endl;
 		}
 		cout<<"- - - -"<<endl;
@@ -174,5 +174,8 @@ void Matrix<DataType>::push(Vector<DataType>& vec)
 }
 
 template class Matrix<double>;
+template class Matrix<float>;
+template class Matrix<int>;
+
 
 }

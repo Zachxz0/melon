@@ -1,11 +1,13 @@
 #include <iostream>
-using namespace std;
 #include <vector>
+#include <string>
 #include <melon/mat.hpp>
 #include <melon/vec.hpp>
-using namespace melon;
+#include <melon/reader.hpp>
 #include <boost/shared_ptr.hpp>
-void test()
+using namespace melon;
+using namespace std;
+void testMatAndVec()
 {
 	Matrix<double> mat(2,2) ;
 	mat[0][0] = 1;
@@ -20,7 +22,18 @@ void test()
     Vector<double> vec2 = mat*vec;
     vec2.print(cout);
 }
+
+void testReader()
+{
+	Reader<double,int> reader("/Users/Zoson/Desktop/ml/Ch05/testSet.txt");
+	Matrix<double> mat;
+	Vector<int> vec;
+	reader.getAll(mat,vec);
+	mat.print(cout);
+	vec.print(cout);
+}
 int main()
 {
-	test();
+	//testMatAndVec();
+	testReader();
 }

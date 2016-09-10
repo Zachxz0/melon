@@ -107,11 +107,13 @@ void Vector<DataType>::print(ostream &out)
 	int len = this->getDim();
 	for(int i=0;i<len;++i)
 	{
-		out<<this->m_data[i]<<"\t";
+		out<<this->m_data[i]<<" ";
 	}
 	out<<endl;
 }
 
 template class Vector<double>;
+template class Vector<float>;
+template class Vector<int>;
 
 }
