@@ -1,4 +1,4 @@
-SUB_DIRS=melon
+SUB_DIRS=utils melon
 export CC INCLUDE BUILD_DIR APP BIN_DIR
 
 all:$(SUB_DIRS)

@@ -1,5 +1,5 @@
 #env path#
-CC = g++
+CC = gcc
 APP = melon
 CURR_DIR=$(shell pwd)
 INCLUDE = $(CURR_DIR)/include
