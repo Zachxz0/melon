@@ -11,7 +11,7 @@ Vector<DataType>::Vector(int num)
 {
 	for(int i=0;i<num;++i)
 	{
-		DataType n;
+		DataType n = 0;
 		m_data.push_back(n);
 	}
 }
@@ -70,6 +70,18 @@ DataType Vector<DataType>::operator*(Matrix<DataType>&mat)
 }
 
 template<typename DataType>
+Vector<DataType> Vector<DataType>::operator*(DataType val)
+{
+	int dim = this->getDim();
+	Vector<DataType> temp(dim);
+	for(int i=0;i<dim;++i)
+	{
+		temp[i] = (*this)[i]*val;
+	}
+	return temp;
+}
+
+template<typename DataType>
 Vector<DataType> Vector<DataType>::operator+(const Vector<DataType>&vec)
 {
 	Vector<DataType> temp;
@@ -85,9 +97,9 @@ Vector<DataType> Vector<DataType>::operator+(const Vector<DataType>&vec)
 template<typename DataType>
 Vector<DataType> Vector<DataType>::operator-(const Vector<DataType>&vec)
 {
-	Vector<DataType> temp;
 	const int dim = vec.getDim();
 	if(dim!=this->getDim())return *this;
+	Vector<DataType> temp(dim);
 	for(int i=0;i<dim;++i)
 	{
 		temp.m_data[i] = this->m_data[i]-vec.m_data[i];
@@ -110,6 +122,18 @@ void Vector<DataType>::print(ostream &out)
 		out<<this->m_data[i]<<" ";
 	}
 	out<<endl;
+}
+
+template<typename DataType>
+Vector<DataType> Vector<DataType>::operator/(DataType val)
+{
+	Vector<DataType> temp ;
+	const int dim = this->getDim();
+	for(int i=0;i<dim;++i)
+	{
+		temp.push((*this)[i]/val);
+	}
+	return temp;
 }
 
 template class Vector<double>;

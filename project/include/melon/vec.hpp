@@ -23,10 +23,13 @@ public:
 	Vector<DataType>& operator=(const Vector<DataType>& vec);
 	DataType operator*(const Vector<DataType>& vec);
 	DataType operator*(Matrix<DataType>& mat);
+	Vector<DataType> operator*(DataType val);
 	Vector<DataType> operator-(const Vector<DataType>& vec);
 	Vector<DataType> operator+(const Vector<DataType>& vec);
+	Vector<DataType> operator/(DataType val);
 	DataType& operator[](int index);
 
+	inline void clear(){m_data.clear();}
 	void push(DataType data);
 	void print(ostream &out);
 protected:

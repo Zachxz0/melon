@@ -7,6 +7,18 @@ namespace melon
 {
 
 template<typename DataType>
+Matrix<DataType>::Matrix(Matrix<DataType>& mat)
+{
+	int row = mat.getRow();
+	for(int i=0;i<row;++i)
+	{
+		Vector<DataType>* newVec = new Vector<DataType>(mat[i]);
+		boost::shared_ptr<Vector<DataType> > sp(newVec);
+		m_data.push_back(sp);
+	}
+}
+
+template<typename DataType>
 Matrix<DataType>::Matrix(int i,int ii)
 {
 	for(int n=0;n<i;++n)
@@ -84,7 +96,7 @@ Vector<DataType> Matrix<DataType>::operator*(Vector<DataType>&vec)
 	int l_row = this->getRow();
 	int l_col = this->getCol();
 	int dim = vec.getDim();
-	Vector<DataType> temp(dim);
+	Vector<DataType> temp(l_row);
 	if(l_col==dim)
 	{
 		for(int i=0;i<l_row;++i)
@@ -171,6 +183,22 @@ void Matrix<DataType>::push(Vector<DataType>& vec)
 	Vector<DataType> *newVec = new Vector<DataType>(vec);
 	boost::shared_ptr<Vector<DataType> > sp(newVec);
 	m_data.push_back(sp);
+}
+
+template<typename DataType>
+Matrix<DataType> Matrix<DataType>::transpose()
+{
+	int row = this->getRow();
+	int col = this->getCol();
+	Matrix<DataType> temp(col,row);
+	for(int i=0;i<row;++i)
+	{
+		for(int j=0;j<col;++j)
+		{
+			temp[j][i] = (*this)[i][j];
+		}
+	}
+	return temp;
 }
 
 template class Matrix<double>;

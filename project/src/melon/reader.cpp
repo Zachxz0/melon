@@ -22,6 +22,7 @@ void Reader<Data,Label>::getAll(Matrix<Data> &mat,Vector<Label>& label)
 		Label l1;
 		m_fs>>d1>>d2>>l1;
 		Vector<Data> vec;
+		vec.push(1);
 		vec.push(d1);
 		vec.push(d2);
 		mat.push(vec);

@@ -3,10 +3,21 @@
 #include <math.h>
 namespace melon
 {
-
-double sigmod(double x)
+template<typename DataType>
+DataType sigmod(DataType x)
 {
 	return 1.0/(1+exp(-x));
+}
+
+template<typename DataType>
+Vector<DataType>& sigmod(Vector<DataType> &vec)
+{
+	int dim = vec.getDim();
+	for(int i=0;i<dim;++i)
+	{
+		vec[i] = sigmod<DataType>(vec[i]);
+	}
+	return vec;
 }
 
 double dsigmod(double x)
