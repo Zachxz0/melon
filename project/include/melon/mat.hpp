@@ -30,7 +30,7 @@ public:
 	}
 
 	Vector<DataType>& operator[](int i);
-	Matrix<DataType>& operator=(const Matrix<DataType> &mat);
+	Matrix<DataType>& operator=(Matrix<DataType> &mat);
 	Matrix<DataType> operator*(Matrix<DataType> &mat);
 	Vector<DataType> operator*(Vector<DataType>&vec);
 	Matrix<DataType> operator-(Matrix<DataType>&mat);

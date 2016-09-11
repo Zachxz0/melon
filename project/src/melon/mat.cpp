@@ -57,8 +57,15 @@ void Matrix<DataType>::deSerialize(string)
 
 
 template<typename DataType>
-Matrix<DataType>& Matrix<DataType>::operator=(const Matrix<DataType>&mat)
+Matrix<DataType>& Matrix<DataType>::operator=(Matrix<DataType>&mat)
 {
+	int row = mat.getRow();
+	for(int i=0;i<row;++i)
+	{
+		Vector<DataType>* newVec = new Vector<DataType>(mat[i]);
+		boost::shared_ptr<Vector<DataType> > sp(newVec);
+		m_data.push_back(sp);
+	}
 	return *this;
 }
 

@@ -1,13 +1,13 @@
-#include <melon/log_neuron.hpp>
+#include <melon/linear_neuron.hpp>
+#include <vector>
 #include <iostream>
-#include <ostream>
 #include <melon/vec.hpp>
 #include <utils/func.hpp>
 using namespace std;
 namespace melon
 {
 
-double LogNeuron::forward(Vector<double> &data)
+double LinearNeuron::forward(Vector<double> &data)
 {
 	if(data.getDim()!=m_weight.getDim())
 	{
@@ -23,7 +23,7 @@ double LogNeuron::forward(Vector<double> &data)
 	}
 }
 
-Vector<double> LogNeuron::forward(Matrix<double> &data)
+Vector<double> LinearNeuron::forward(Matrix<double> &data)
 {
 	if(data.getCol()!=m_weight.getDim()){
 		throw "dim no same";
@@ -32,19 +32,18 @@ Vector<double> LogNeuron::forward(Matrix<double> &data)
 		m_out_data = data*m_weight;
 		m_in_data.clear();
 		m_in_data = data;
-		sigmod<double>(m_out_data);
 		return m_out_data;
 	}
 }
 
-Vector<double> LogNeuron::backward(Vector<double>& label)
+Vector<double> LinearNeuron::backward(Vector<double>& label)
 {
 	m_loss.clear();
 	m_loss = m_out_data - label;
 	return m_loss;
 }
 
-double LogNeuron::backward(double label)
+double LinearNeuron::backward(double label)
 {
 	m_loss.clear();
 	double diff = m_out_data[0] - label;
@@ -52,7 +51,7 @@ double LogNeuron::backward(double label)
 	return diff;
 }
 
-void LogNeuron::updateWeight()
+void LinearNeuron::updateWeight()
 {
 	if(m_loss.getDim()<0)return;
 	int row = m_in_data.getRow();
@@ -60,7 +59,7 @@ void LogNeuron::updateWeight()
 }
 
 
-void LogNeuron::initSpec(int in_dim)
+void LinearNeuron::initSpec(int in_dim)
 {
 	for(int i=0;i<in_dim;++i)
 	{
@@ -68,7 +67,7 @@ void LogNeuron::initSpec(int in_dim)
 	}
 }
 
-void LogNeuron::print(ostream &out)
+void LinearNeuron::print(ostream &out)
 {
 	for(int i=0;i<m_weight.getDim();++i)
 	{

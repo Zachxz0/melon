@@ -1,5 +1,6 @@
-#ifndef _LOGREGRES_H_
-#define _LOGREGRES_H_
+#ifndef _LINEAR_NEURON_H_
+#define _LINEAR_NEURON_H_
+
 #include <melon/neuron.hpp>
 #include <vector>
 #include <melon/vec.hpp>
@@ -9,11 +10,11 @@ using namespace std;
 namespace melon
 {
 
-class LogNeuron:public Neuron
+class LinearNeuron:public Neuron
 {
 public:
-	LogNeuron(){}
-	~LogNeuron(){}
+	LinearNeuron(){}
+	~LinearNeuron(){}
 	virtual void initSpec(int in_dim); 	
 	virtual Vector<double> forward(Matrix<double> &data);
 	virtual double forward(Vector<double> &);
