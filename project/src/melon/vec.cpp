@@ -7,12 +7,11 @@ using namespace std;
 namespace melon
 {
 template<typename DataType>
-Vector<DataType>::Vector(int num)
+Vector<DataType>::Vector(int num,DataType def)
 {
 	for(int i=0;i<num;++i)
 	{
-		DataType n = 0;
-		m_data.push_back(n);
+		m_data.push_back(def);
 	}
 }
 

@@ -14,7 +14,7 @@ class Vector
 {
 public:
 	Vector():m_data(){}
-	explicit Vector(int num);
+	explicit Vector(int num,DataType def = 0);
 	virtual ~Vector(){}
 	virtual string onSerialize();
 	virtual void deSerialize(string);

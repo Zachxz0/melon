@@ -19,6 +19,7 @@ public:
 	virtual Vector<double>* forward(Matrix<double> *data);
 	virtual Vector<double>* backward(Vector<double> *label);
 	virtual void updateWeight();
+	virtual double test(Vector<double>* test);
 	virtual void print(ostream &out);
 	inline virtual string getType(){ return "LogNeuron";}
 };

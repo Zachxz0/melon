@@ -51,6 +51,15 @@ void LinearNeuron::print(ostream &out)
 	out<<endl;
 }
 
+double LinearNeuron::test(Vector<double>* test)
+{
+	if(test==NULL||test->getDim()!=m_weight.getDim())
+	{
+		throw "params illegal";
+	}else{
+		return (*test)*m_weight;
+	}
+}
 
 }
 

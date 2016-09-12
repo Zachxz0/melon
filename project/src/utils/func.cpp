@@ -35,6 +35,22 @@ double innerProduct(const vector<double>&x,const vector<double>&y)
 	}
 	return result;
 }
+
+double exp(double val)
+{
+	return exp(val);
+}
+
+double loge(double val)
+{
+	return log(val);
+}
+
+double logn(double val,double di)
+{
+	return log(val)/log(di);
+}
+
 template Vector<double>& sigmod(Vector<double> &vec);
 template Vector<float>& sigmod(Vector<float> &vec);
 

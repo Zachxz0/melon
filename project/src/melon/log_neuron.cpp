@@ -9,7 +9,8 @@ namespace melon
 
 Vector<double>* LogNeuron::forward(Matrix<double> *data)
 {
-	if(data->getCol()!=m_weight.getDim()){
+
+	if(data==NULL||data->getCol()!=m_weight.getDim()){
 		throw "dim no same";
 	}else{
 		m_out_data->clear();
@@ -48,6 +49,21 @@ void LogNeuron::print(ostream &out)
 	for(int i=0;i<m_weight.getDim();++i)
 	{
 		out<<m_weight[i]<<" ";
+	}
+}
+
+double LogNeuron::test(Vector<double>* test)
+{
+	if(test==NULL||test->getDim()!=m_weight.getDim())
+	{
+		throw "params illegal";
+	}else{
+		double dot = (*test)*m_weight;
+		if(dot>0.5){
+			return 1.0;
+		}else{
+			return 0.0;
+		}
 	}
 }
 

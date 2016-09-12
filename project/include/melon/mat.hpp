@@ -15,7 +15,7 @@ public:
 	Matrix(){}
 	Matrix(Matrix<DataType>& mat);
 	Matrix(Vector<DataType>&);
-	Matrix(int i,int ii);
+	Matrix(int i,int ii,DataType def = 0);
 	~Matrix(){}
 	virtual string onSerialize();
 	virtual void deSerialize(string);

@@ -24,6 +24,7 @@ public:
 	}
 	virtual Vector<double>* forward(Matrix<double> *data)=0;
 	virtual Vector<double>* backward(Vector<double> *label)=0;
+	virtual double test(Vector<double>* test)=0;
 	virtual void updateWeight()=0;
 	inline void setLearnRate(double rate){m_lr = rate;};
 	virtual void initSpec(int in_dim)= 0;

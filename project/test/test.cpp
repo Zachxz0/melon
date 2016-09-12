@@ -9,9 +9,16 @@
 #include <boost/shared_ptr.hpp>
 #include <melon/linear_neuron.hpp>
 #include <melon/layer.hpp>
+#include <melon/stump_neuron.hpp>
 using namespace boost;
 using namespace melon;
 using namespace std;
+void change(Vector<double> * vec)
+{
+	(*vec)[0] = 1.22;
+	(*vec)[1] = 23.22;
+}
+
 void testMatAndVec()
 {
 	Matrix<double> mat(3,2) ;
@@ -24,6 +31,10 @@ void testMatAndVec()
 	mat.print(cout);
 	cout<<"mat transpose"<<endl;
 	mat.transpose().print(cout);
+
+	Vector<double>* vec = new Vector<double>(3,1);
+	change(vec);
+	vec->print(cout);
 }
 
 void testReader()
@@ -112,11 +123,30 @@ void testLayer()
 	layer.print(cout);
 }
 
+void testStumpNeuron()
+{
+	Reader<double,double> reader("/Users/Zoson/Desktop/ml/Ch07/test.txt");
+	Matrix<double> mat;
+	Vector<double> label;
+	reader.getAll(mat,label);
+	mat.print(cout);
+	label.print(cout);
+	Vector<double> *weight = new Vector<double>(mat.getRow(),(double)1.0/mat.getRow());
+	for(int i=0;i<3;++i)
+	{
+		StumpNeuron *stu = new StumpNeuron();
+		double a = stu->innerDigest(&mat,&label,weight);
+		stu->print(cout);
+		cout<<"alpha:"<<a<<endl;
+	}
+}
+
 int main()
 {
 	//testMatAndVec();
 	//testReader();
 	//testLogNeuron();
 	//testLinearNeuron();
-	testLayer();
+	//testLayer();
+	testStumpNeuron();
 }

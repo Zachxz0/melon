@@ -6,12 +6,11 @@ using namespace std;
 namespace melon
 {
 
-void Layer::push(Neuron *neuron,double weight)
+void Layer::push(Neuron *neuron)
 { 
 	if(neuron==NULL)return;
 	boost::shared_ptr<Neuron> sp(neuron);
 	m_neuron_s.push_back(sp);
-	m_weight.push(weight);
 }
 
 Matrix<double>* Layer::forward(Matrix<double>*data)
@@ -46,11 +45,6 @@ void Layer::updateNeuron()
 	}
 }
 
-void Layer::updateWeight()
-{
-
-}
-
 void Layer::print(ostream &out)
 {
 	int num = m_neuron_s.size();
@@ -60,7 +54,6 @@ void Layer::print(ostream &out)
 		out<<"\t";
 		m_neuron_s[i]->print(out);
 	}
-	out<<endl;
 }
 
 }

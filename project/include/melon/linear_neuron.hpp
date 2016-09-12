@@ -2,7 +2,6 @@
 #define _LINEAR_NEURON_H_
 
 #include <melon/neuron.hpp>
-#include <vector>
 #include <melon/vec.hpp>
 #include <melon/mat.hpp>
 #include <ostream>
@@ -19,6 +18,7 @@ public:
 	virtual Vector<double>* forward(Matrix<double> *data);
 	virtual Vector<double>* backward(Vector<double> *label);
 	virtual void updateWeight();
+	virtual double test(Vector<double>* test);
 	virtual void print(ostream &out);
 	inline virtual string getType(){ return "LinearNeuron";}
 };

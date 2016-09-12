@@ -24,9 +24,8 @@ public:
 		delete m_loss;
 		delete m_out_data;
 	}
-	void push(Neuron *neuron,double weight = 1.0);
+	void push(Neuron *neuron);
 	inline int getNum(){ return m_neuron_s.size(); }
-	virtual void updateWeight();
 	virtual void updateNeuron();
 	virtual string getType(){ return "Layer"; }
 	virtual Matrix<double>* forward(Matrix<double> *data);
@@ -34,7 +33,6 @@ public:
 	virtual void print(ostream &out);
 protected:
 	vector<boost::shared_ptr<Neuron> > m_neuron_s;
-	Vector<double> m_weight;
 	Matrix<double>* m_out_data;
 	Matrix<double>* m_loss;
 	Matrix<double>* m_in_data;

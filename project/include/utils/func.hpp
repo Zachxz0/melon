@@ -11,6 +11,8 @@ DataType sigmod(DataType x);
 template<typename DataType>
 Vector<DataType>& sigmod(Vector<DataType> &vec);
 
+double loge(double val);
+
 double dsigmod(double x);
 
 double innerProduct(const vector<double>&x,const vector<double>&y);
