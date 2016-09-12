@@ -24,7 +24,7 @@ void Reader<Data,Label>::getAll(Matrix<Data> &mat,Vector<Label>& label)
 		Vector<Data> vec;
 		vec.push(d1);
 		vec.push(d2);
-		mat.push(vec);
+		mat.insertRow(vec);
 		label.push(l1);
 	}
 }

@@ -7,31 +7,31 @@ using namespace std;
 namespace melon
 {
 
-Vector<double> LogNeuron::forward(Matrix<double> *data)
+Vector<double>* LogNeuron::forward(Matrix<double> *data)
 {
 	if(data->getCol()!=m_weight.getDim()){
 		throw "dim no same";
 	}else{
-		m_out_data.clear();
-		m_out_data = (*data)*m_weight;
+		m_out_data->clear();
+		*(m_out_data) = (*data)*m_weight;
 		m_in_data = data;
-		sigmod<double>(m_out_data);
+		sigmod<double>(*m_out_data);
 		return m_out_data;
 	}
 }
 
-Vector<double> LogNeuron::backward(Vector<double>* label)
+Vector<double>* LogNeuron::backward(Vector<double>* label)
 {
-	m_loss.clear();
-	m_loss = m_out_data - *label;
+	m_loss->clear();
+	*m_loss = *m_out_data - *label;
 	return m_loss;
 }
 
 void LogNeuron::updateWeight()
 {
-	if(m_loss.getDim()<0)return;
+	if(m_loss->getDim()<0)return;
 	int row = m_in_data->getRow();
-	m_weight = m_weight - ((m_in_data->transpose()*m_loss)*m_lr)/row;
+	m_weight = m_weight - (m_in_data->transpose()*(*m_loss)*m_lr)/row;
 }
 
 
@@ -49,7 +49,6 @@ void LogNeuron::print(ostream &out)
 	{
 		out<<m_weight[i]<<" ";
 	}
-	out<<endl;
 }
 
 

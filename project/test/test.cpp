@@ -8,6 +8,8 @@
 #include <utils/timer.hpp>
 #include <boost/shared_ptr.hpp>
 #include <melon/linear_neuron.hpp>
+#include <melon/layer.hpp>
+using namespace boost;
 using namespace melon;
 using namespace std;
 void testMatAndVec()
@@ -42,13 +44,14 @@ void testLogNeuron()
 	Matrix<double> mat;
 	Vector<double> label;
 	reader.getAll(mat,label);
+	mat.insertCol();
 	LogNeuron log;
 	log.initSpec(mat.getCol());
 	for(int i=0;i<500;++i)
 	{
 		try{
-			Vector<double> outs = log.forward(&mat);
-			Vector<double> loss = log.backward(&label);
+			Vector<double>* outs = log.forward(&mat);
+			Vector<double>* loss = log.backward(&label);
 			log.updateWeight();
 		}catch(...)
 		{
@@ -70,8 +73,8 @@ void testLinearNeuron()
 	for(int i=0;i<500;++i)
 	{
 		try{
-			Vector<double> outs = lin.forward(&mat);
-			Vector<double> loss = lin.backward(&label);
+			Vector<double>* outs = lin.forward(&mat);
+			Vector<double>* loss = lin.backward(&label);
 			lin.updateWeight();
 		}catch(...)
 		{
@@ -82,10 +85,38 @@ void testLinearNeuron()
 	lin.print(cout);
 }
 
+
+void testLayer()
+{
+	Reader<double,double> reader("/Users/Zoson/Desktop/ml/Ch08/ex1.txt");
+	Matrix<double> mat;
+	Vector<double> label;
+	reader.getAll(mat,label);
+	Layer layer ;
+	LinearNeuron *lin = new LinearNeuron();
+	lin->initSpec(mat.getCol());
+	layer.push(lin);
+	for(int i=0;i<500;++i)
+	{
+		try{
+			Matrix<double>* outs = layer.forward(&mat);
+			Matrix<double> mlabel;
+			mlabel.insertRow(label);
+			Matrix<double>* loss = layer.backward(&mlabel);
+			layer.updateNeuron();
+		}catch(...)
+		{
+			cout<<"cat"<<endl;
+		}
+	}
+	layer.print(cout);
+}
+
 int main()
 {
 	//testMatAndVec();
 	//testReader();
 	//testLogNeuron();
-	testLinearNeuron();
+	//testLinearNeuron();
+	testLayer();
 }

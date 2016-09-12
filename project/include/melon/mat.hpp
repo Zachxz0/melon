@@ -35,10 +35,10 @@ public:
 	Vector<DataType> operator*(Vector<DataType>&vec);
 	Matrix<DataType> operator-(Matrix<DataType>&mat);
 	Matrix<DataType> operator+(Matrix<DataType>&mat);
-
     Matrix<DataType> transpose();
+    void insertCol(double val=1.0,int index=-1);
     void clear(){m_data.clear();}
-	void push(Vector<DataType>& vec);
+	void insertRow(Vector<DataType>& vec);
 	void print(ostream &out);
 protected:
 	bool hasSameSpec(const Matrix<DataType>&);

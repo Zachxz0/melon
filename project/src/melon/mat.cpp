@@ -185,7 +185,7 @@ void Matrix<DataType>::print(ostream& out)
 }
 
 template<typename DataType>
-void Matrix<DataType>::push(Vector<DataType>& vec)
+void Matrix<DataType>::insertRow(Vector<DataType>& vec)
 {
 	Vector<DataType> *newVec = new Vector<DataType>(vec);
 	boost::shared_ptr<Vector<DataType> > sp(newVec);
@@ -206,6 +206,23 @@ Matrix<DataType> Matrix<DataType>::transpose()
 		}
 	}
 	return temp;
+}
+
+template<typename DataType>
+void Matrix<DataType>::insertCol(double val,int index)
+{
+	int rows = getRow();
+	int cols = getCol();
+	if(index == -1)
+	{
+		for(int i=0;i<rows;++i)
+		{
+			(*this)[i].push(val);
+		}
+	
+	}else{
+		//to do
+	}
 }
 
 template class Matrix<double>;
