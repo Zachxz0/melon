@@ -14,6 +14,8 @@ $(linearneuron_obj):linear_neuron.cpp
 	$(CC) -c $^ -o $@ -I$(INCLUDE)
 $(reader_obj):reader.cpp
 	$(CC) -c $^ -o $@ -I$(INCLUDE)
+
+
 .Phony:clean
 clean:
 	rm -f *.o test

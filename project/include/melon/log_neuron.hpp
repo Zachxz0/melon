@@ -5,6 +5,7 @@
 #include <melon/vec.hpp>
 #include <melon/mat.hpp>
 #include <ostream>
+#include <string>
 using namespace std;
 namespace melon
 {
@@ -15,12 +16,11 @@ public:
 	LogNeuron(){}
 	~LogNeuron(){}
 	virtual void initSpec(int in_dim); 	
-	virtual Vector<double> forward(Matrix<double> &data);
-	virtual double forward(Vector<double> &);
-	virtual Vector<double> backward(Vector<double> &label);
-	virtual double backward(double label);
+	virtual Vector<double> forward(Matrix<double> *data);
+	virtual Vector<double> backward(Vector<double> *label);
 	virtual void updateWeight();
 	virtual void print(ostream &out);
+	inline virtual string getType(){ return "LogNeuron";}
 };
 
 }

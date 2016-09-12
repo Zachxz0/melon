@@ -1,41 +1,19 @@
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
 #include <math.h>
+#include <melon/vec.hpp>
+
 namespace melon
 {
 template<typename DataType>
-DataType sigmod(DataType x)
-{
-	return 1.0/(1+exp(-x));
-}
+DataType sigmod(DataType x);
 
 template<typename DataType>
-Vector<DataType>& sigmod(Vector<DataType> &vec)
-{
-	int dim = vec.getDim();
-	for(int i=0;i<dim;++i)
-	{
-		vec[i] = sigmod<DataType>(vec[i]);
-	}
-	return vec;
-}
+Vector<DataType>& sigmod(Vector<DataType> &vec);
 
-double dsigmod(double x)
-{
-	return sigmod(x)*(1-sigmod(x));
-}
+double dsigmod(double x);
 
-double innerProduct(const vector<double>&x,const vector<double>&y)
-{
-	if(x.size()!=y.size())return -1;
-	double result = 0;
-	for(int i=0;i<x.size();++i)
-	{
-		result+= x[i]*y[i];
-	}
-	return result;
-}
-
+double innerProduct(const vector<double>&x,const vector<double>&y);
 
 }
 

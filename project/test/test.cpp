@@ -47,8 +47,8 @@ void testLogNeuron()
 	for(int i=0;i<500;++i)
 	{
 		try{
-			Vector<double> outs = log.forward(mat);
-			Vector<double> loss = log.backward(label);
+			Vector<double> outs = log.forward(&mat);
+			Vector<double> loss = log.backward(&label);
 			log.updateWeight();
 		}catch(...)
 		{
@@ -61,25 +61,25 @@ void testLogNeuron()
 
 void testLinearNeuron()
 {
-	// Reader<double,double> reader("/Users/Zoson/Desktop/ml/Ch08/ex1.txt");
-	// Matrix<double> mat;
-	// Vector<double> label;
-	// reader.getAll(mat,label);
-	// LinearNeuron lin;
-	// lin.initSpec(mat.getCol());
-	// for(int i=0;i<500;++i)
-	// {
-	// 	try{
-	// 		Vector<double> outs = lin.forward(mat);
-	// 		Vector<double> loss = lin.backward(label);
-	// 		lin.updateWeight();
-	// 	}catch(...)
-	// 	{
-	// 		cout<<"cat"<<endl;
-	// 	}
+	Reader<double,double> reader("/Users/Zoson/Desktop/ml/Ch08/ex1.txt");
+	Matrix<double> mat;
+	Vector<double> label;
+	reader.getAll(mat,label);
+	LinearNeuron lin;
+	lin.initSpec(mat.getCol());
+	for(int i=0;i<500;++i)
+	{
+		try{
+			Vector<double> outs = lin.forward(&mat);
+			Vector<double> loss = lin.backward(&label);
+			lin.updateWeight();
+		}catch(...)
+		{
+			cout<<"cat"<<endl;
+		}
 		
-	// }
-	// lin.print(cout);
+	}
+	lin.print(cout);
 }
 
 int main()
