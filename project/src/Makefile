@@ -1,4 +1,4 @@
-SUB_DIRS=utils melon
+SUB_DIRS= zoson utils melon
 export CC INCLUDE BUILD_DIR APP BIN_DIR
 
 all:$(SUB_DIRS)

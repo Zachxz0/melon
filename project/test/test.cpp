@@ -10,6 +10,8 @@
 #include <melon/linear_neuron.hpp>
 #include <melon/layer.hpp>
 #include <melon/stump_neuron.hpp>
+#include <zoson/object.hpp>
+#include <thread>
 using namespace boost;
 using namespace melon;
 using namespace std;
@@ -141,6 +143,27 @@ void testStumpNeuron()
 	}
 }
 
+zoson::Object obj;
+void testCond()
+{
+	obj.wait();
+}
+
+void notifyThread()
+{
+	obj.notifyAll();
+}
+void testObject()
+{
+	std::thread t1(testCond);
+	std::thread t2(testCond);		
+	for(int i=0;i<100000;i++);	
+	notifyThread();
+	t1.join();
+	t2.join();
+
+}
+
 int main()
 {
 	//testMatAndVec();
@@ -148,5 +171,6 @@ int main()
 	//testLogNeuron();
 	//testLinearNeuron();
 	//testLayer();
-	testStumpNeuron();
+	//testStumpNeuron();
+	testObject();
 }

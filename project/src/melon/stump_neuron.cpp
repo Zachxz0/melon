@@ -56,7 +56,6 @@ double StumpNeuron::innerDigest(Matrix<double> *data,Vector<double> *label,Vecto
 		}
 	}
 	predictedVals.print(cout);
-	cout<<"minError:"<<minError<<endl;
 	double alpha = 0.5*loge((1.0-minError)/(minError>(1e-16)?minError:1e-16));
 	double sum_weight = 0.0;
 	for(int i=0;i<row;++i)
@@ -137,9 +136,10 @@ double StumpNeuron::findMin()
 
 void StumpNeuron::print(ostream &out)
 {
-	out<<"dim:"<<m_dim<<endl;
-	out<<"thresh:"<<m_thresh<<endl;
-	out<<"less than:"<<m_lt<<endl;
+	out<<getType()<<endl;
+	out<<"\tdim:"<<m_dim<<endl;
+	out<<"\tthresh:"<<m_thresh<<endl;
+	out<<"\tless than:"<<m_lt<<endl;
 }
 
 

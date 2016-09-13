@@ -38,11 +38,6 @@ protected:
 	Vector<double> m_weight;//weight + bias 
 };
 
-class NeuronParam
-{
-
-};
-
 }
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef _OBJECT_H_
-#define _OBJECT_H_
+#ifndef _OBJECT__H_
+#define _OBJECT__H_
 
 #include <string>
 using namespace std;

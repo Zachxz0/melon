@@ -33,7 +33,7 @@ public:
 	void push(DataType data);
 	void print(ostream &out);
 protected:
-	vector<DataType> m_data;
+	mutable vector<DataType> m_data;
 };
 
 }
