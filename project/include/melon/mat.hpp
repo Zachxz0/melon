@@ -2,14 +2,14 @@
 #define _DATA_SET_H_
 #include <boost/shared_ptr.hpp>
 #include <vector>
-#include <iostream>
+#include <zoson/object.hpp>
 using namespace std;
 namespace melon
 {
 template<typename t>class Vector;
 
 template<typename DataType>
-class Matrix
+class Matrix:virtual public zoson::Object
 {
 public:
 	Matrix(){}
@@ -39,7 +39,7 @@ public:
     void insertCol(double val=1.0,int index=-1);
     void clear(){m_data.clear();}
 	void insertRow(Vector<DataType>& vec);
-	void print(ostream &out);
+	string print();
 protected:
 	bool hasSameSpec(const Matrix<DataType>&);
 	vector<boost::shared_ptr<Vector<DataType> > > m_data;

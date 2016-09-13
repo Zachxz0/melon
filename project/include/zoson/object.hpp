@@ -16,12 +16,15 @@ class Object
 public:
 	Object();
 	virtual ~Object();
-	inline bool equals(const Object& obj){ return (this==(&obj)); }
-	string toString();
+	virtual inline bool equals(const Object& obj){ return (this==(&obj)); }
+	virtual string toString(){return "Object";};
 	void notify();
 	void notifyAll();
 	void wait(long time);
 	void wait();
+	virtual string print(){return "Object";};
+	virtual string onSerialize(){return "to do";}
+	virtual void deSerialize(string){};
 private:
 	mutex m_mutex;
 	condition_variable m_cv;

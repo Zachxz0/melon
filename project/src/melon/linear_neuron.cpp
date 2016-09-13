@@ -1,6 +1,6 @@
 #include <melon/linear_neuron.hpp>
 #include <vector>
-#include <iostream>
+#include <sstream>
 #include <melon/vec.hpp>
 #include <utils/func.hpp>
 using namespace std;
@@ -42,13 +42,15 @@ void LinearNeuron::initSpec(int in_dim)
 	}
 }
 
-void LinearNeuron::print(ostream &out)
+string LinearNeuron::print()
 {
+	stringstream ss;
 	for(int i=0;i<m_weight.getDim();++i)
 	{
-		out<<m_weight[i]<<" ";
+		ss<<m_weight[i]<<" ";
 	}
-	out<<endl;
+	ss<<"\r\n";
+	return ss.str();
 }
 
 double LinearNeuron::test(Vector<double>* test)

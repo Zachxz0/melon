@@ -1,8 +1,8 @@
 #ifndef _DATA_H_
 #define _DATA_H_
 #include <vector>
-#include <iostream>
 #include <string>
+#include <zoson/object.hpp>
 using namespace std;
 
 namespace melon
@@ -10,7 +10,7 @@ namespace melon
 template<typename t>class Matrix;
 
 template<typename DataType>
-class Vector
+class Vector//:virtual public zoson::Object
 {
 public:
 	Vector():m_data(){}
@@ -31,7 +31,7 @@ public:
 
 	inline void clear(){m_data.clear();}
 	void push(DataType data);
-	void print(ostream &out);
+	string print();
 protected:
 	mutable vector<DataType> m_data;
 };

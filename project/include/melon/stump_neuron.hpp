@@ -4,7 +4,7 @@
 #include <melon/neuron.hpp>
 #include <melon/vec.hpp>
 #include <melon/mat.hpp>
-#include <ostream>
+#include <string>
 using namespace std;
 namespace melon
 {
@@ -16,10 +16,11 @@ public:
 	virtual ~StumpNeuron(){}
 	virtual void initSpec(int in_dim); 	
 	virtual void updateWeight(){};
-	virtual void print(ostream &out);
+	virtual string print();
 	virtual double innerDigest(Matrix<double> *data,Vector<double> *label,Vector<double>*weight);
 	inline virtual string getType(){ return "StumpNeuron";}
 	virtual double test(Vector<double>*);
+	inline virtual string toString(){ return "StumpNeuron";}
 protected:
 	virtual Vector<double>* forward(Matrix<double> *data);
 	virtual Vector<double>* backward(Vector<double> *label);

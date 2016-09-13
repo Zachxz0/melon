@@ -30,13 +30,13 @@ void testMatAndVec()
 	mat[1][1] = 4;
 	mat[2][0] = 5;
 	mat[2][1] = 6;
-	mat.print(cout);
+	cout<<mat.print();
 	cout<<"mat transpose"<<endl;
-	mat.transpose().print(cout);
+	cout<<mat.transpose().print();
 
 	Vector<double>* vec = new Vector<double>(3,1);
 	change(vec);
-	vec->print(cout);
+	cout<<vec->print();
 }
 
 void testReader()
@@ -45,8 +45,8 @@ void testReader()
 	Matrix<double> mat;
 	Vector<int> vec;
 	reader.getAll(mat,vec);
-	mat.print(cout);
-	vec.print(cout);
+	cout<<mat.print();
+	cout<<vec.print();
 }
 
 void testLogNeuron()
@@ -72,7 +72,7 @@ void testLogNeuron()
 		}
 		
 	}
-	log.print(cout);
+	cout<<log.print();
 }
 
 void testLinearNeuron()
@@ -95,7 +95,7 @@ void testLinearNeuron()
 		}
 		
 	}
-	lin.print(cout);
+	cout<<lin.print();
 }
 
 
@@ -122,7 +122,7 @@ void testLayer()
 			cout<<"cat"<<endl;
 		}
 	}
-	layer.print(cout);
+	cout<<layer.print();
 }
 
 void testStumpNeuron()
@@ -131,14 +131,14 @@ void testStumpNeuron()
 	Matrix<double> mat;
 	Vector<double> label;
 	reader.getAll(mat,label);
-	mat.print(cout);
-	label.print(cout);
+	cout<<mat.print();
+	cout<<label.print();
 	Vector<double> *weight = new Vector<double>(mat.getRow(),(double)1.0/mat.getRow());
 	for(int i=0;i<3;++i)
 	{
 		StumpNeuron *stu = new StumpNeuron();
 		double a = stu->innerDigest(&mat,&label,weight);
-		stu->print(cout);
+		cout<<stu->print();
 		cout<<"alpha:"<<a<<endl;
 	}
 }
@@ -168,9 +168,9 @@ int main()
 {
 	//testMatAndVec();
 	//testReader();
-	//testLogNeuron();
+	testLogNeuron();
 	//testLinearNeuron();
 	//testLayer();
 	//testStumpNeuron();
-	testObject();
+	//testObject();
 }

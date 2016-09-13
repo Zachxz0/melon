@@ -1,7 +1,7 @@
 #include <melon/mat.hpp>
 #include <melon/vec.hpp>
 #include <boost/shared_ptr.hpp>
-#include <iostream>
+#include <sstream>
 using namespace std;
 namespace melon
 {
@@ -167,21 +167,23 @@ bool Matrix<DataType>::hasSameSpec(const Matrix<DataType>&mat)
 }
 
 template<typename DataType>
-void Matrix<DataType>::print(ostream& out)
+string Matrix<DataType>::print()
 {
+	stringstream ss;
 	int row = getRow();
 	int col = getCol();
 	if(row>0&&col>0)
 	{
-		cout<<"- - - -"<<endl;
+		ss<<"- - - -"<<"\r\n";
 		for(int i=0;i<row;++i)
 		{
 			for(int j=0;j<col;++j)
-				out<<(*this)[i][j]<<" ";
-			out<<endl;
+				ss<<(*this)[i][j]<<" ";
+			ss<<"\r\n";
 		}
-		cout<<"- - - -"<<endl;
+		ss<<"- - - -"<<"\r\n";
 	}
+	return ss.str();
 }
 
 template<typename DataType>

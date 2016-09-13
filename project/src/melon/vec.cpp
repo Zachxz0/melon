@@ -1,7 +1,7 @@
 #include <melon/vec.hpp>
 #include <melon/mat.hpp>
 #include <string>
-#include <iostream>
+#include <sstream>
 #include <vector>
 using namespace std;
 namespace melon
@@ -113,14 +113,16 @@ DataType& Vector<DataType>::operator[](int index)
 }
 
 template<typename DataType>
-void Vector<DataType>::print(ostream &out)
+string Vector<DataType>::print()
 {
+	stringstream ss;
 	int len = this->getDim();
 	for(int i=0;i<len;++i)
 	{
-		out<<this->m_data[i]<<" ";
+		ss<<this->m_data[i]<<" ";
 	}
-	out<<endl;
+	ss<<"\r\n";
+	return ss.str();
 }
 
 template<typename DataType>

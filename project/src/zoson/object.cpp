@@ -1,5 +1,4 @@
 #include <zoson/object.hpp>
-#include <iostream>
 #include <chrono>
 #include <thread>
 namespace zoson
@@ -13,11 +12,6 @@ Object::Object()
 Object::~Object()
 {
 
-}
-
-string Object::toString()
-{
-	return "Object";
 }
 
 void Object::notify()

@@ -1,7 +1,7 @@
 #include <melon/stump_neuron.hpp>
 #include <utils/func.hpp>
 #include <math.h>
-#include <ostream>
+#include <sstream>
 #include <float.h>
 using namespace std;
 namespace melon
@@ -55,7 +55,6 @@ double StumpNeuron::innerDigest(Matrix<double> *data,Vector<double> *label,Vecto
 			}
 		}
 	}
-	predictedVals.print(cout);
 	double alpha = 0.5*loge((1.0-minError)/(minError>(1e-16)?minError:1e-16));
 	double sum_weight = 0.0;
 	for(int i=0;i<row;++i)
@@ -72,7 +71,6 @@ double StumpNeuron::innerDigest(Matrix<double> *data,Vector<double> *label,Vecto
 	{
 		(*weight)[i] = (*weight)[i]/sum_weight;
 	}
-	weight->print(cout);
 	return alpha;
 }
 
@@ -134,12 +132,14 @@ double StumpNeuron::findMin()
 	return min;
 }
 
-void StumpNeuron::print(ostream &out)
+string StumpNeuron::print()
 {
-	out<<getType()<<endl;
-	out<<"\tdim:"<<m_dim<<endl;
-	out<<"\tthresh:"<<m_thresh<<endl;
-	out<<"\tless than:"<<m_lt<<endl;
+	stringstream ss;
+	ss<<getType()<<"\r\n";
+	ss<<"\tdim:"<<m_dim<<"\r\n";
+	ss<<"\tthresh:"<<m_thresh<<"\r\n";
+	ss<<"\tless than:"<<m_lt<<"\r\n";
+	return ss.str();
 }
 
 

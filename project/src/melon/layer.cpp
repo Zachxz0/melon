@@ -1,7 +1,7 @@
 #include <melon/layer.hpp>
 #include <melon/Neuron.hpp>
 #include <boost/shared_ptr.hpp>
-#include <iostream>
+#include <sstream>
 using namespace std;
 namespace melon
 {
@@ -45,15 +45,17 @@ void Layer::updateNeuron()
 	}
 }
 
-void Layer::print(ostream &out)
+string Layer::print()
 {
+	stringstream ss;
 	int num = m_neuron_s.size();
 	for(int i=0;i<num;++i)
 	{
-		out<<m_neuron_s[i]->getType()<<endl;
-		out<<"\t";
-		m_neuron_s[i]->print(out);
+		ss<<m_neuron_s[i]->getType()<<"\r\n";
+		ss<<"\t";
+		ss<<m_neuron_s[i]->print();
 	}
+	return ss.str();
 }
 
 }

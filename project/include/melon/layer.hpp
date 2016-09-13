@@ -1,17 +1,16 @@
 #ifndef _LAYER_H_
 #define _LAYER_H_
-#include <melon/object.hpp>
+#include <zoson/object.hpp>
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include <melon/vec.hpp>
-#include <ostream>
 #include <string>
 #include <melon/Neuron.hpp>
 using namespace std;
 namespace melon
 {
 
-class Layer:virtual public Object
+class Layer:virtual public zoson::Object
 {
 public:
 	Layer()
@@ -30,7 +29,7 @@ public:
 	virtual string getType(){ return "Layer"; }
 	virtual Matrix<double>* forward(Matrix<double> *data);
 	virtual Matrix<double>* backward(Matrix<double>* label);
-	virtual void print(ostream &out);
+	virtual string print();
 protected:
 	vector<boost::shared_ptr<Neuron> > m_neuron_s;
 	Matrix<double>* m_out_data;
