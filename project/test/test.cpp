@@ -109,18 +109,16 @@ void testLayer()
 	LinearNeuron *lin = new LinearNeuron();
 	lin->initSpec(mat.getCol());
 	layer.push(lin);
-	for(int i=0;i<500;++i)
+	for(int i=0;i<20;++i)
 	{
-		try{
-			Matrix<double>* outs = layer.forward(&mat);
-			Matrix<double> mlabel;
-			mlabel.insertRow(label);
-			Matrix<double>* loss = layer.backward(&mlabel);
-			layer.updateNeuron();
-		}catch(...)
-		{
-			cout<<"cat"<<endl;
-		}
+			Vector<double>* outs = lin->forward(&mat);
+			//Matrix<double> mlabel;
+			//mlabel.insertRow(label);
+			cout<<"forward"<<endl;
+			Vector<double>* loss = lin->backward(&label);
+			cout<<"backward"<<endl;
+			lin->updateWeight();
+			cout<<"update"<<endl;
 	}
 	cout<<layer.print();
 }
@@ -168,9 +166,9 @@ int main()
 {
 	//testMatAndVec();
 	//testReader();
-	testLogNeuron();
+	//testLogNeuron();
 	//testLinearNeuron();
-	//testLayer();
+	testLayer();
 	//testStumpNeuron();
 	//testObject();
 }

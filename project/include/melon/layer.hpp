@@ -28,7 +28,7 @@ public:
 	virtual void updateNeuron();
 	virtual string getType(){ return "Layer"; }
 	virtual Matrix<double>* forward(Matrix<double> *data);
-	virtual Matrix<double>* backward(Matrix<double>* label);
+	virtual Matrix<double>* backward(Vector<double>* label);
 	virtual string print();
 protected:
 	vector<boost::shared_ptr<Neuron> > m_neuron_s;

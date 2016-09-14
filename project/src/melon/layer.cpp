@@ -25,13 +25,13 @@ Matrix<double>* Layer::forward(Matrix<double>*data)
 	return m_out_data;
 }
 
-Matrix<double>* Layer::backward(Matrix<double>*label)
+Matrix<double>* Layer::backward(Vector<double>*label)
 {
-	if(label==NULL||label->getRow()==0||label->getCol()==0||m_neuron_s.size()==0)return NULL;
+	if(label==NULL||label->getDim()||m_neuron_s.size()==0)return NULL;
 	int neuron_num = m_neuron_s.size();
 	for(int i=0;i<neuron_num;++i)
 	{
-		m_loss->insertRow(*(m_neuron_s[i]->backward(&(*label)[i])));
+		m_loss->insertRow(*(m_neuron_s[i]->backward(label)));
 	}
 	return m_loss;
 }
