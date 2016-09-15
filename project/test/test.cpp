@@ -64,7 +64,7 @@ void testLogNeuron()
 	{
 		try{
 			Vector<double>* outs = log.forward(&mat);
-			Vector<double>* loss = log.backward(&label);
+			Vector<double>* loss = log.backward(&(label - (*outs));
 			log.updateWeight();
 		}catch(...)
 		{
@@ -87,7 +87,7 @@ void testLinearNeuron()
 	{
 		try{
 			Vector<double>* outs = lin.forward(&mat);
-			Vector<double>* loss = lin.backward(&label);
+			Vector<double>* loss = lin.backward(&(label-*outs));
 			lin.updateWeight();
 		}catch(...)
 		{
@@ -115,7 +115,7 @@ void testLayer()
 			//Matrix<double> mlabel;
 			//mlabel.insertRow(label);
 			cout<<"forward"<<endl;
-			Vector<double>* loss = lin->backward(&label);
+			Vector<double>* loss = lin->backward(&(label-*outs));
 			cout<<"backward"<<endl;
 			lin->updateWeight();
 			cout<<"update"<<endl;

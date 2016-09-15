@@ -12,9 +12,13 @@ namespace melon
 class Neuron:virtual public zoson::Object
 {
 public:
-	Neuron()
+	Neuron():isHidden(false)
 	{
-		m_out_data = new Vector<double>();
+		init();
+	}
+	Neuron(bool ishidden):isHidden(ishidden)
+	{
+		init();
 	}
 	virtual ~Neuron()
 	{
@@ -27,9 +31,16 @@ public:
 	virtual inline string getType(){return "Neuron"; }
 	virtual string print()=0;
 	virtual inline string toString(){return "Neuron";};
+	inline void setHidden(bool ishidden){ isHidden = ishidden;}
 protected:
+	virtual void init()
+	{
+		m_out_data = new Vector<double>();	
+	}
 	Vector<double>* m_out_data; // store out_data
 	Matrix<double>* m_in_data; //store in_data
+	bool isHidden;
+
 };
 
 }

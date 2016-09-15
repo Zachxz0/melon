@@ -107,6 +107,29 @@ Vector<DataType> Vector<DataType>::operator-(const Vector<DataType>&vec)
 }
 
 template<typename DataType>
+Vector<DataType>& Vector<DataType>::operator*=(const Vector<DataType>& vec)
+{
+	int dim = this->getDim();
+	for(int i=0;i<dim;++i)
+	{
+		(*this)[i] = (*this)[i]*vec.m_data[i];
+	}
+	return *this;
+}
+
+template<typename DataType>
+Vector<DataType>& Vector<DataType>::operator*=(DataType val)
+{
+	int dim = this->getDim();
+	for(int i=0;i<dim;++i)
+	{
+		(*this)[i] = (*this)[i]*val;
+	}
+	return *this;
+}
+
+
+template<typename DataType>
 DataType& Vector<DataType>::operator[](int index)
 {
 	return this->m_data[index];

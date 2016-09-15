@@ -14,11 +14,16 @@ class LinearNeuron:public Neuron
 public:
 	LinearNeuron():m_lr(0.12)
 	{
-		m_loss = new Vector<double>();
+		init();
+	}
+	LinearNeuron(bool ishidden):Neuron(ishidden)
+	{
+		init();
 	}
 	~LinearNeuron()
 	{
 		delete m_loss;
+		delete m_delta;
 	}
 	virtual void initSpec(int in_dim); 	
 	virtual Vector<double>* forward(Matrix<double> *data);
@@ -29,8 +34,14 @@ public:
 	virtual inline string toString(){return "LinearNeuron";}
 	inline virtual string getType(){ return "LinearNeuron";}
 protected:
+	virtual void init()
+	{
+		m_loss = new Vector<double>();
+		m_delta = new Vector<double>();
+	}
 	Vector<double> m_weight;//weight + bias 
 	Vector<double>* m_loss;//loss val
+	Vector<double>* m_delta;//transport to the pre layer
 	double m_lr;//learning rate
 };
 

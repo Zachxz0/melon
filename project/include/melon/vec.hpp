@@ -26,9 +26,10 @@ public:
 	Vector<DataType> operator*(DataType val);
 	Vector<DataType> operator-(const Vector<DataType>& vec);
 	Vector<DataType> operator+(const Vector<DataType>& vec);
+	Vector<DataType>& operator*=(const Vector<DataType>& vec);
+	Vector<DataType>& operator*=(DataType val);
 	Vector<DataType> operator/(DataType val);
 	DataType& operator[](int index);
-
 	inline void clear(){m_data.clear();}
 	void push(DataType data);
 	string print();

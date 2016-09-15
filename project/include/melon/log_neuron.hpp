@@ -12,12 +12,22 @@ namespace melon
 class LogNeuron:public LinearNeuron
 {
 public:
-	LogNeuron(){}
-	~LogNeuron(){}
+	LogNeuron()
+	{
+		m_out_sig_data = new Vector<double>();
+	}
+	~LogNeuron()
+	{
+		delete m_out_sig_data ;
+	}
 	virtual Vector<double>* forward(Matrix<double> *data);
+	virtual Vector<double>* backward(Vector<double>*delte);
 	virtual double test(Vector<double>* test);
 	virtual inline string toString(){return "LogNeuron";}
 	inline virtual string getType(){ return "LogNeuron";}
+
+protected:
+	Vector<double>* m_out_sig_data;
 };
 
 }

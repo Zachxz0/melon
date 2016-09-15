@@ -19,11 +19,16 @@ Vector<double>* LinearNeuron::forward(Matrix<double> *data)
 	}
 }
 
-Vector<double>* LinearNeuron::backward(Vector<double>* label)
+Vector<double>* LinearNeuron::backward(Vector<double>* delta)
 {
 	m_loss->clear();
-	*m_loss = *m_out_data - *label;
-	return m_loss;
+	*m_loss = *delta;
+	m_delta->clear();
+	for(int i=0;i<m_weight.getDim();++i)
+	{
+		m_delta->push((*delta)[i]*m_weight[i]);
+	}
+	return m_delta;
 }
 
 void LinearNeuron::updateWeight()

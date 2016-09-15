@@ -10,8 +10,16 @@ namespace melon
 Vector<double>* LogNeuron::forward(Matrix<double> *data)
 {
 	LinearNeuron::forward(data);
-	sigmod<double>(*m_out_data);
-	return m_out_data;
+	*m_out_sig_data = *(m_out_data);
+	sigmod<double>(*m_out_sig_data);
+	return m_out_sig_data;
+}
+
+Vector<double>* LogNeuron::backward(Vector<double> *delte)
+{
+	LinearNeuron::backward(delte);
+	*m_delta *= dsigmod<double>(*m_out_sig_data);
+	return delte;
 }
 
 double LogNeuron::test(Vector<double>* test)
