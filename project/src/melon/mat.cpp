@@ -155,6 +155,26 @@ Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType>&mat)
 }
 
 template<typename DataType>
+Matrix<DataType>& Matrix<DataType>::operator+=(Matrix<DataType>&mat)
+{
+	if(this->getRow()==mat.getRow()&&this->getCol()==mat.getCol())
+	{
+		int row = this->getRow();
+		int col = this->getCol();
+		for(int i=0;i<row;++i)
+		{
+			for(int j=0;j<col;++j)
+			{
+				(*this)[i][j] += mat[i][j];
+			}
+		}
+	}else{
+		throw false;
+	}
+	return *this;
+}
+
+template<typename DataType>
 Vector<DataType>& Matrix<DataType>::operator[](int index)
 {
 	return *(this->m_data[index]);

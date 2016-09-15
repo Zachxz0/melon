@@ -35,6 +35,7 @@ public:
 	Vector<DataType> operator*(Vector<DataType>&vec);
 	Matrix<DataType> operator-(Matrix<DataType>&mat);
 	Matrix<DataType> operator+(Matrix<DataType>&mat);
+	Matrix<DataType>& operator+=(Matrix<DataType>&mat);
     Matrix<DataType> transpose();
     void insertCol(double val=1.0,int index=-1);
     void clear(){m_data.clear();}

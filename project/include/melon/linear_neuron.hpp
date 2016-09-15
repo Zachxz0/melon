@@ -27,7 +27,7 @@ public:
 	}
 	virtual void initSpec(int in_dim); 	
 	virtual Vector<double>* forward(Matrix<double> *data);
-	virtual Vector<double>* backward(Vector<double> *label);
+	virtual Matrix<double>* backward(Vector<double> *label);
 	virtual void updateWeight();
 	virtual double test(Vector<double>* test);
 	virtual string print();
@@ -37,11 +37,11 @@ protected:
 	virtual void init()
 	{
 		m_loss = new Vector<double>();
-		m_delta = new Vector<double>();
+		m_delta = new Matrix<double>();
 	}
 	Vector<double> m_weight;//weight + bias 
 	Vector<double>* m_loss;//loss val
-	Vector<double>* m_delta;//transport to the pre layer
+	Matrix<double>* m_delta;//transport to the pre layer
 	double m_lr;//learning rate
 };
 

@@ -12,7 +12,7 @@ template<typename DataType>
 Vector<DataType>& sigmod(Vector<DataType> &vec);
 
 template<typename DataType>
-Vector<DataType> dsigmod(Vector<DataType>&vec);
+Vector<DataType>& dsigmod(Vector<DataType>&vec);
 
 double loge(double val);
 

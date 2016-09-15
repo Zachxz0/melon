@@ -15,17 +15,22 @@ Vector<double>* LogNeuron::forward(Matrix<double> *data)
 	return m_out_sig_data;
 }
 
-Vector<double>* LogNeuron::backward(Vector<double> *delte)
+Matrix<double>* LogNeuron::backward(Vector<double> *delte)
 {
 	LinearNeuron::backward(delte);
-	*m_delta *= dsigmod<double>(*m_out_sig_data);
-	return delte;
+	int cols = m_delta->getRow();
+	for(int i=0;i<cols;++i)
+	{
+		(*m_delta)[i] *= dsigmod<double>(*m_out_sig_data);
+	}
+	return m_delta;
 }
 
 double LogNeuron::test(Vector<double>* test)
 {
 	double dot = LinearNeuron::test(test);
-	if(dot>0.5){
+	if(dot>0.5)
+	{
 		return 1.0;
 	}else{
 		return 0.0;

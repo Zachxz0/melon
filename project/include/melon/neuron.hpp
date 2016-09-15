@@ -25,9 +25,10 @@ public:
 		delete m_out_data;
 	}
 	virtual Vector<double>* forward(Matrix<double> *data)=0;
-	virtual Vector<double>* backward(Vector<double> *label)=0;
+	virtual Matrix<double>* backward(Vector<double> *label)=0;
 	virtual double test(Vector<double>* test)=0;
 	virtual void updateWeight()=0;
+	virtual int getDim(){return m_in_data->getRow();}
 	virtual inline string getType(){return "Neuron"; }
 	virtual string print()=0;
 	virtual inline string toString(){return "Neuron";};

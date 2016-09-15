@@ -21,7 +21,7 @@ public:
 		delete m_out_sig_data ;
 	}
 	virtual Vector<double>* forward(Matrix<double> *data);
-	virtual Vector<double>* backward(Vector<double>*delte);
+	virtual Matrix<double>* backward(Vector<double>*delte);
 	virtual double test(Vector<double>* test);
 	virtual inline string toString(){return "LogNeuron";}
 	inline virtual string getType(){ return "LogNeuron";}

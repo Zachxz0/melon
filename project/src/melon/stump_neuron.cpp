@@ -79,7 +79,7 @@ Vector<double>* StumpNeuron::forward(Matrix<double> *data)
 	return NULL;
 }
 
-Vector<double>* StumpNeuron::backward(Vector<double>* label)
+Matrix<double>* StumpNeuron::backward(Vector<double>* label)
 {
 	return NULL;
 }

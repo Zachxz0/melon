@@ -19,6 +19,19 @@ Vector<DataType>& sigmod(Vector<DataType> &vec)
 	}
 	return vec;
 }
+template<typename DataType>
+Matrix<DataType>& dsigmod(Matrix<DataType>&mat)
+{
+	int row = mat.getRow();
+	int col = mat.getCol();
+	for(int i=0;i<row;++i)
+	{
+		for(int j=0;j<col;++j)
+		{
+			mat[i][j] = dsigmod<DataType>(mat[i][j]);
+		}
+	}
+}
 
 template<typename DataType>
 Vector<DataType>& dsigmod(Vector<DataType>&vec)

@@ -23,7 +23,7 @@ public:
 	inline virtual string toString(){ return "StumpNeuron";}
 protected:
 	virtual Vector<double>* forward(Matrix<double> *data);
-	virtual Vector<double>* backward(Vector<double> *label);
+	virtual Matrix<double>* backward(Vector<double> *label);
 	void stumpClassify(Matrix<int> &ret,int dim,double thresh,bool eq);
 	double findMax();
 	double findMin();
