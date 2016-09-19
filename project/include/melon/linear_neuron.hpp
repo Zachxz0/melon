@@ -25,6 +25,7 @@ public:
 		delete m_loss;
 		delete m_delta;
 	}
+	virtual void setLearningRate(double lr){m_lr=lr;}
 	virtual void initSpec(int in_dim); 	
 	virtual Vector<double>* forward(Matrix<double> *data);
 	virtual Matrix<double>* backward(Vector<double> *label);

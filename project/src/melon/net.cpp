@@ -6,7 +6,11 @@ namespace melon
 
 void NeuronNet::updateLayer()
 {
-
+	int num = getNum();
+	for(int i=0;i<num;++i)
+	{
+		m_layer_s[i]->updateNeuron();
+	}
 }
 
 Matrix<double>* NeuronNet::forward(Matrix<double> *data)

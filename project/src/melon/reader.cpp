@@ -13,19 +13,21 @@ Reader<Data,Label>::Reader(string path):m_fs(path.data())
 {}
 
 template<typename Data,typename Label>
-void Reader<Data,Label>::getAll(Matrix<Data> &mat,Vector<Label>& label)
+void Reader<Data,Label>::getAll(Matrix<Data> &mat,Vector<Label>& label,int dim )
 {
 	while(!m_fs.eof())
 	{
-		Data d1;
-		Data d2;
-		Label l1;
-		m_fs>>d1>>d2>>l1;
 		Vector<Data> vec;
-		vec.push(d1);
-		vec.push(d2);
+		for(int i=0;i<dim-1;++i)
+		{
+			Data d;
+			m_fs>>d;
+			vec.push(d);
+		}
 		mat.insertRow(vec);
-		label.push(l1);
+		Label l;
+		m_fs>>l;
+		label.push(l);
 	}
 }
 
