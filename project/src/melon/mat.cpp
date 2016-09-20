@@ -7,12 +7,12 @@ namespace melon
 {
 
 template<typename DataType>
-Matrix<DataType>::Matrix(Matrix<DataType>& mat)
+Matrix<DataType>::Matrix(const Matrix<DataType>& mat)
 {
 	int row = mat.getRow();
 	for(int i=0;i<row;++i)
 	{
-		Vector<DataType>* newVec = new Vector<DataType>(mat[i]);
+		Vector<DataType>* newVec = new Vector<DataType>(*(mat.m_data[i]));
 		boost::shared_ptr<Vector<DataType> > sp(newVec);
 		m_data.push_back(sp);
 	}
@@ -56,13 +56,13 @@ void Matrix<DataType>::deSerialize(string)
 
 
 template<typename DataType>
-Matrix<DataType>& Matrix<DataType>::operator=(Matrix<DataType>&mat)
+Matrix<DataType>& Matrix<DataType>::operator=(const Matrix<DataType>&mat)
 {
 	m_data.clear();
 	int row = mat.getRow();
 	for(int i=0;i<row;++i)
 	{
-		Vector<DataType>* newVec = new Vector<DataType>(mat[i]);
+		Vector<DataType>* newVec = new Vector<DataType>(*(mat.m_data[i]));
 		boost::shared_ptr<Vector<DataType> > sp(newVec);
 		m_data.push_back(sp);
 	}
@@ -70,7 +70,7 @@ Matrix<DataType>& Matrix<DataType>::operator=(Matrix<DataType>&mat)
 }
 
 template<typename DataType>
-Matrix<DataType> Matrix<DataType>::operator*(Matrix<DataType>&mat)
+Matrix<DataType> Matrix<DataType>::operator*(const Matrix<DataType>&mat)
 {
 	int l_row = this->getRow();
 	int l_col = this->getCol();
@@ -86,7 +86,7 @@ Matrix<DataType> Matrix<DataType>::operator*(Matrix<DataType>&mat)
 				DataType item=0;
 				for(int k=0;k<l_col;++k)
 				{
-					item +=(*this)[i][k] * mat[k][j];
+					item +=(*this)[i][k] * (*mat.m_data[k])[j];//mat[k][j];
 				}
 				temp[i][j] = item;
 			}
@@ -121,7 +121,23 @@ Vector<DataType> Matrix<DataType>::operator*(Vector<DataType>&vec)
 }
 
 template<typename DataType>
-Matrix<DataType> Matrix<DataType>::operator+(Matrix<DataType>&mat)
+Matrix<DataType> Matrix<DataType>::operator*(double val)
+{
+	int row = this->getRow();
+	int col = this->getCol();
+	Matrix<DataType> temp(row,col);
+	for(int i=0;i<row;++i)
+	{
+		for(int j=0;j<col;++j)
+		{
+			temp[i][j] = (*this)[i][j] * val;
+		}
+	}
+	return temp;
+}
+
+template<typename DataType>
+Matrix<DataType> Matrix<DataType>::operator+(const Matrix<DataType>&mat)
 {
 	Matrix<DataType> temp(this->getRow(),this->getCol());
 	if(this->hasSameSpec(mat))
@@ -130,7 +146,7 @@ Matrix<DataType> Matrix<DataType>::operator+(Matrix<DataType>&mat)
 		int col = this->getCol();
 		for(int i=0;i<row;++i)
 			for(int j=0;j<col;++j)
-				temp[i][j] = (*this)[i][j] + mat[i][j];
+				temp[i][j] = (*this)[i][j] + (*mat.m_data[i])[j];
 	}else{
 		throw false;
 	}
@@ -138,7 +154,7 @@ Matrix<DataType> Matrix<DataType>::operator+(Matrix<DataType>&mat)
 }
 
 template<typename DataType>
-Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType>&mat)
+Matrix<DataType> Matrix<DataType>::operator-(const Matrix<DataType>&mat)
 {
 	Matrix<DataType> temp(this->getRow(),this->getCol());
 	if(this->hasSameSpec(mat))
@@ -147,7 +163,7 @@ Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType>&mat)
 		int col = this->getCol();
 		for(int i=0;i<row;++i)
 			for(int j=0;j<col;++j)
-				temp[i][j] = (*this)[i][j] - mat[i][j];
+				temp[i][j] = (*this)[i][j] - (*mat.m_data[i])[j];//mat[i][j];
 	}else{
 		throw false;
 	}
@@ -155,7 +171,7 @@ Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType>&mat)
 }
 
 template<typename DataType>
-Matrix<DataType>& Matrix<DataType>::operator+=(Matrix<DataType>&mat)
+Matrix<DataType>& Matrix<DataType>::operator+=(const Matrix<DataType>&mat)
 {
 	if(this->getRow()==mat.getRow()&&this->getCol()==mat.getCol())
 	{
@@ -165,7 +181,7 @@ Matrix<DataType>& Matrix<DataType>::operator+=(Matrix<DataType>&mat)
 		{
 			for(int j=0;j<col;++j)
 			{
-				(*this)[i][j] += mat[i][j];
+				(*this)[i][j] += (*mat.m_data[i])[j];
 			}
 		}
 	}else{

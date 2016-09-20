@@ -9,7 +9,7 @@ namespace melon
 class SoftMaxNeuron
 {
 public:
-	SoftMaxNeuron():m_lr(0.12){init();}
+	SoftMaxNeuron():m_lr(0.02){init();}
 	~SoftMaxNeuron()
 	{
 		delete m_out_data;

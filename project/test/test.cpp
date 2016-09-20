@@ -194,21 +194,20 @@ void testSoftMax()
 	reader.getAll(mat,label,22);
 	mat.insertCol();
 	SoftMaxNeuron log;
-	log.initSpec(2,22,0.1);
-	for(int i=0;i<1000;++i)
+	log.initSpec(2,22,0.2);
+	for(int i=0;i<100;++i)
 	{
 		try{
 			Matrix<double>* outs = log.forward(&mat);
 			//Vector<double> delta =  *(outs) - label;
 			Matrix<double>* pre_delta = log.backward(&label);
 			log.updateWeight();
-			if(i%50==0)cout<<log.print();
 		}catch(...)
 		{
 			cout<<"cat"<<endl;
 		}
-		
 	}
+	cout<<log.print();
 	Reader<double,double> testreader("/Users/Zoson/Desktop/ml/Ch05/horseColicTest.txt");
 	Matrix<double> test_mat;
 	Vector<double> test_vec;
@@ -223,7 +222,7 @@ void testSoftMax()
 			corr++;
 		}
 	}
-	cout<<log.print();
+	//cout<<log.print();
 	cout<<"correct_rate:"<<(double)corr/row<<endl;
 // 	Matrix<double> train_data;
 // 	Matrix<double> test_data;

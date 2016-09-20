@@ -13,7 +13,7 @@ class Matrix:virtual public zoson::Object
 {
 public:
 	Matrix(){}
-	Matrix(Matrix<DataType>& mat);
+	Matrix(const Matrix<DataType>& mat);
 	Matrix(Vector<DataType>&);
 	Matrix(int i,int ii,DataType def = 0);
 	~Matrix(){}
@@ -30,12 +30,13 @@ public:
 	}
 
 	Vector<DataType>& operator[](int i);
-	Matrix<DataType>& operator=(Matrix<DataType> &mat);
-	Matrix<DataType> operator*(Matrix<DataType> &mat);
+	Matrix<DataType>& operator=(const Matrix<DataType> &mat);
+	Matrix<DataType> operator*(const Matrix<DataType> &mat);
 	Vector<DataType> operator*(Vector<DataType>&vec);
-	Matrix<DataType> operator-(Matrix<DataType>&mat);
-	Matrix<DataType> operator+(Matrix<DataType>&mat);
-	Matrix<DataType>& operator+=(Matrix<DataType>&mat);
+	Matrix<DataType> operator*(double val);
+	Matrix<DataType> operator-(const Matrix<DataType>&mat);
+	Matrix<DataType> operator+(const Matrix<DataType>&mat);
+	Matrix<DataType>& operator+=(const Matrix<DataType>&mat);
     Matrix<DataType> transpose();
     void insertCol(double val=1.0,int index=-1);
     void clear(){m_data.clear();}
