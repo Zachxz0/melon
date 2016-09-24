@@ -31,16 +31,24 @@ Matrix<double>* SoftMaxNeuron::forward(Matrix<double>*data)
 	return m_out_data;
 }
 
+Matrix<double>* SoftMaxNeuron::forward(Matrix<double>*data,Matrix<double>*data_t)
+{
+	m_in_data = data;
+	m_in_data_t = data_t;
+	return forward(data);
+}
+
 double SoftMaxNeuron::softmax(Vector<double>* x,int n)
 {
 	double den = 0;//分母
 	int k = m_weight.getRow();
+	double mol = (m_weight[n]*(*x));
 	for(int i=0;i<k;++i)
 	{
-		den += exp(m_weight[i]*(*x));
+		den += exp(m_weight[i]*(*x)-mol);
 	}
-	double res = exp(m_weight[n]*(*x))/den;
-	return (m_weight[n]*(*x))/den;
+	double res = 1/den;
+	return res;
 }
 
 Matrix<double>* SoftMaxNeuron::backward(Vector<double>*label)
@@ -70,7 +78,7 @@ void SoftMaxNeuron::updateWeight()
 	int row = m_in_data->getRow();
 	double alpha = m_lr/row;
 	//cout<<alpha<<endl;
-	Matrix<double> grad = (m_in_data->transpose()*(*m_loss))*alpha;
+	Matrix<double> grad = ((*m_in_data_t)*(*m_loss))*alpha;
 	//cout<<grad.print();
 	m_weight = m_weight + grad.transpose();//+ grad;
 }
@@ -90,21 +98,22 @@ void SoftMaxNeuron::initSpec(int r,int c,double val)
 double SoftMaxNeuron::test(Vector<double> *x)
 {
 	int min_index = 0;
-	double min_val = DBL_MAX;
+	double min_val = DBL_MIN;
 	int k = m_weight.getRow();
-	double den = 0;
+	double out = 0;
 	for(int i=0;i<k;++i)
 	{
-		den += exp(m_weight[i]*(*x));
-	}
-	for(int i=0;i<k;++i)
-	{
-		double out = exp(m_weight[i]*(*x))/den;
-		cout<<i<<" "<<out<<endl;
-		if(out<min_val)
+		double mol = m_weight[i]*(*x);
+		double den =0;
+		for(int i=0;i<k;++i)
 		{
-			out = min_val;
-			min_val = i;
+			den += exp(m_weight[i]*(*x)-mol);
+		}
+		out = 1/den;
+		if(out>min_val)
+		{
+			min_val = out;
+			min_index = i;
 		}
 	}
 	return min_index;
